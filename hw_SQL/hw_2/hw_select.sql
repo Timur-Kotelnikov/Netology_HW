@@ -1,0 +1,6 @@
+--select album_name, release_year from albums where release_year = '2018'
+--select track_name, track_length from tracks order by track_length desc limit 1
+--select track_name from tracks where track_length >= '210'
+--select disk_name from disks where release_year >= '2018' and release_year <= '2020'
+--select author_name from authors where author_name not like '% %'
+--select track_name from tracks where track_name like '% my %' or track_name like 'My %'

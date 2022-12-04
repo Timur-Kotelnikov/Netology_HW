@@ -1,0 +1,19 @@
+--SELECT genre_name, (SELECT COUNT(*) from authors_genres where authors_genres.genre_id = genres.genre_id) from genres;
+--SELECT COUNT(*) from tracks where album_id in (SELECT album_id from albums where release_year >= '2019' and release_year <= '2020');
+--SELECT album_name, ROUND ((SELECT AVG(track_length) from tracks where tracks.album_id = albums.album_id), 0) from albums;
+--SELECT author_name from authors where author_id NOT IN (SELECT author_id from albums_authors where album_id in (SELECT album_id from albums where release_year = '2020'));
+--SELECT disk_name from disks where disk_id in (SELECT disk_id from disks_tracks where track_id in (SELECT track_id from tracks where author_id in (SELECT author_id from authors where author_name = 'Linkin Park')));
+--SELECT album_name from albums where album_id in (SELECT album_id from albums_authors where (SELECT COUNT (*) from authors_genres where authors_genres.author_id = albums_authors.author_id) > 1);
+--SELECT track_name from tracks where track_id not in (SELECT track_id from disks_tracks);
+--SELECT author_name from authors where author_id in (SELECT author_id from tracks where track_length = (SELECT MIN(track_length) from tracks));
+--SELECT album_name from albums where (SELECT COUNT (*) from tracks where tracks.album_id = albums.album_id) = (SELECT COUNT(*) from tracks group by album_id order by count limit 1);
+
+--SELECT g.genre_name, COUNT (*) from genres g JOIN authors_genres ag ON ag.genre_id = g.genre_id group by g.genre_name;
+--SELECT COUNT(*) from tracks t JOIN albums a ON a.album_id = t.album_id WHERE a.release_year >= '2019' AND a.release_year <= '2020';
+--SELECT a.album_name, ROUND(AVG(t.track_length)) from tracks t JOIN albums a ON a.album_id = t.album_id GROUP BY a.album_name ORDER BY round;
+--SELECT a.author_name from authors a JOIN albums_authors aa ON aa.author_id = a.author_id JOIN albums al ON aa.album_id = al.album_id where al.release_year is NULL OR al.release_year != '2020';
+--SELECT d.disk_name from disks d JOIN disks_tracks dt ON dt.disk_id = d.disk_id JOIN tracks t ON t.track_id = dt.track_id JOIN authors a ON a.author_id = t.author_id where a.author_name = 'Linkin Park';
+--SELECT a.album_name from albums a JOIN albums_authors aa ON aa.album_id = a.album_id JOIN authors_genres ag ON ag.author_id = aa.author_id GROUP BY a.album_name HAVING COUNT(a.album_name) > 1;
+--SELECT t.track_name from tracks t LEFT JOIN disks_tracks dt ON t.track_id = dt.track_id WHERE dt.track_id is NULL;
+--SELECT a.author_name from authors a JOIN tracks t ON t.author_id = a.author_id order by t.track_length LIMIT 1;
+--SELECT a.album_name from albums a JOIN tracks t ON t.album_id = a.album_id GROUP BY a.album_name ORDER BY COUNT(t.track_name) LIMIT 1;

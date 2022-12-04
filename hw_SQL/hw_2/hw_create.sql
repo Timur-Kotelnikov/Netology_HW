@@ -1,0 +1,51 @@
+CREATE TABLE IF NOT EXISTS albums (
+	album_id INT PRIMARY KEY,
+	album_name VARCHAR,
+	release_year INT,
+	CONSTRAINT albums_check CHECK (release_year >= 1900 AND release_year <= 2022)
+);
+
+CREATE TABLE IF NOT EXISTS genres (
+	genre_id INT PRIMARY KEY,
+	genre_name VARCHAR,
+	CONSTRAINT genre_u UNIQUE (genre_name)
+);
+
+CREATE TABLE IF NOT EXISTS authors (
+	author_id INT PRIMARY KEY,
+	author_name VARCHAR,
+	CONSTRAINT author_u UNIQUE (author_name)
+);
+
+CREATE TABLE IF NOT EXISTS authors_genres (
+	author_id INT REFERENCES authors(author_id),
+	genre_id INT REFERENCES genres(genre_id),
+	CONSTRAINT authors_genres_pk PRIMARY KEY (author_id, genre_id)
+);
+
+CREATE TABLE IF NOT EXISTS albums_authors (
+	album_id INT REFERENCES albums(album_id),
+	author_id INT REFERENCES authors(author_id),
+	CONSTRAINT albums_authors_pk PRIMARY KEY (album_id, author_id)
+);
+
+CREATE TABLE IF NOT EXISTS tracks (
+	track_id INT PRIMARY KEY,
+	track_name VARCHAR,
+	track_length INT,
+	album_id INT REFERENCES albums(album_id),
+	author_id INT REFERENCES authors(author_id)
+);
+
+CREATE TABLE IF NOT EXISTS disks (
+	disk_id INT PRIMARY KEY,
+	disk_name VARCHAR,
+	release_year INT,
+	CONSTRAINT disk_check CHECK (release_year >= 1900 AND release_year <= 2022)
+);
+
+CREATE TABLE IF NOT EXISTS disks_tracks (
+	disk_id INT REFERENCES disks(disk_id),
+	track_id INT REFERENCES tracks(track_id),
+	CONSTRAINT disks_tracks_pk PRIMARY KEY (disk_id, track_id)
+);
