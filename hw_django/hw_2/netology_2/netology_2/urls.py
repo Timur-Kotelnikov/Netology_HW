@@ -17,9 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from app_2.views import get_food
 from pagi_2.views import paginator
+from orm_phones.views import show_catalog, show_product
+
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('food/', get_food),
     path('food/<str:dish>/', get_food),
-    path('paginator/', paginator)
+    path('paginator/', paginator),
+    path('catalog/', show_catalog, name='catalog'),
+    path('catalog/<slug>/', show_product, name='phone'),
 ]
