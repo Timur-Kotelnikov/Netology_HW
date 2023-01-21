@@ -8,13 +8,13 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ['title', 'description']
 
 
-class StockSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Stock
-        fields = ['address']
-
-
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = ['age', 'name']
+
+
+class StockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stock
+        fields = ['address', 'head', 'product']
