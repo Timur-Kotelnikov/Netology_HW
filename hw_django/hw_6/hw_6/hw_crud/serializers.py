@@ -5,16 +5,18 @@ from .models import Product, Stock, Person
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['title', 'description']
+        fields = '__all__'
 
 
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
-        fields = ['age', 'name']
+        fields = '__all__'
 
 
 class StockSerializer(serializers.ModelSerializer):
+    product = ProductSerializer
+
     class Meta:
         model = Stock
         fields = ['address', 'head', 'product']
