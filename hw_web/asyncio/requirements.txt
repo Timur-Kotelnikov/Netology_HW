@@ -1,0 +1,5 @@
+aiohttp
+sqlalchemy==1.4.44
+more_itertools
+requests
+asyncpg
